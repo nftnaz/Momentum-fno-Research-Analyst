@@ -1,11 +1,10 @@
+import httpx
+
 from app.core.config import settings
 
 
 class TelegramService:
     async def send_message(self, text: str) -> dict:
-        """
-        Placeholder: no real HTTP call until TELEGRAM_ENABLED and credentials are set.
-        """
         if not settings.TELEGRAM_ENABLED:
             return {
                 "ok": False,
@@ -20,14 +19,23 @@ class TelegramService:
                 "reason": "Telegram credentials missing in .env",
             }
 
-        # Later: real call
-        # url = f"https://api.telegram.org/bot{settings.TELEGRAM_BOT_TOKEN}/sendMessage"
-        # payload = {"chat_id": settings.TELEGRAM_CHAT_ID, "text": text, "parse_mode": "HTML"}
-        return {
-            "ok": False,
-            "skipped": True,
-            "reason": "Telegram send not implemented yet (placeholder)",
+        url = f"https://api.telegram.org/bot{settings.TELEGRAM_BOT_TOKEN}/sendMessage"
+        payload = {
+            "chat_id": settings.TELEGRAM_CHAT_ID,
+            "text": text,
         }
+
+        try:
+            async with httpx.AsyncClient(timeout=20) as client:
+                response = await client.post(url, json=payload)
+            data = response.json()
+            return {
+                "ok": bool(data.get("ok")),
+                "status_code": response.status_code,
+                "response": data,
+            }
+        except Exception as e:
+            return {"ok": False, "error": str(e)}
 
     async def send_signal_alert(self, signal: dict) -> dict:
         text = (
