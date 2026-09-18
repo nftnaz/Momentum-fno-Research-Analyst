@@ -1,0 +1,32 @@
+[
+  {
+    "symbol": "NIFTY50",
+    "name": "Nifty 50",
+    "exchange": "NSE_INDEX",
+    "instrument_key": "NSE_INDEX|Nifty 50"
+  },
+  {
+    "symbol": "BANKNIFTY",
+    "name": "Nifty Bank",
+    "exchange": "NSE_INDEX",
+    "instrument_key": "NSE_INDEX|Nifty Bank"
+  },
+  {
+    "symbol": "RELIANCE",
+    "name": "Reliance Industries",
+    "exchange": "NSE_EQ",
+    "instrument_key": "NSE_EQ|INE002A01018"
+  },
+  {
+    "symbol": "SBIN",
+    "name": "State Bank of India",
+    "exchange": "NSE_EQ",
+    "instrument_key": "NSE_EQ|INE062A01020"
+  },
+  {
+    "symbol": "TCS",
+    "name": "Tata Consultancy Services",
+    "exchange": "NSE_EQ",
+    "instrument_key": "NSE_EQ|INE467B01029"
+  }
+]
